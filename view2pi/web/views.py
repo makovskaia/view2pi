@@ -1,11 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from web.forms import GuestForm
 
-# Create your views here.
 def index(request):
-    template = loader.get_template('web/index.html')
-    context = {
-        'dunno': 1,
-    }
-    return HttpResponse(template.render(context, request))
+    if request.method == 'POST':
+        form = GuestForm(request.POST)
+        if form.is_valid():
+            guest = form.save(commit=False)
+            guest.ip = request.META.get("REMOTE_ADDR")
+            guest.save()
+            return render(request, 'web/index.html')
+        else:
+            return(request, 'web/form.html', {'form': form })
+    else:
+        form = GuestForm()
+        template = loader.get_template('web/form.html')
+        context = {
+            form: form
+        }
+        return render(request, 'web/form.html', {'form': form})
