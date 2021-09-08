@@ -8,17 +8,6 @@ from django.template.loader import get_template
 from api.models import Image, Marker
 from django.views.decorators.http import require_http_methods
 from django.core import serializers
-# @require_http_methods(["POST"])
-# def index(request):
-#     # f=UserForm(request.POST)
-#     if f.is_valid():
-#         name = f.cleaned_data['name']
-#         email = f.cleaned_data['email']
-#         phone = f.cleaned_data['phone']
-#         u = User(name=name, email=email,phone=phone)
-#         u.save()
-#         return HttpResponse(u.id)
-#     return HttpResponse('no')
 
 
 @require_http_methods(["GET"])
@@ -35,19 +24,3 @@ def image(request, id):
         print('lol')
         res = 'lol'
     return response
-
-    # f=UserForm(request.POST)
-    # if f.is_valid():
-    #     name = f.cleaned_data['name']
-    #     email = f.cleaned_data['email']
-    #     phone = f.cleaned_data['phone']
-    #     u = User(name=name, email=email,phone=phone)
-    #     u.save()
-    #     return HttpResponse(u.id)
-    # return HttpResponse('no')
-
-
-
-
-
-
